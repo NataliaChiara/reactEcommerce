@@ -1,3 +1,56 @@
-.NavBar {
-    background-color: rebeccapurple;
+.nav{
+    background-color: #171a21;
+    color: #c5c3c0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15vh;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+}
+
+.tittle {
+    font-size: 25px;
+    margin-left: 5px;
+}
+
+.links {
+    margin: 0px 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navButton {
+    background: none;
+    border: none;
+    color: #c5c3c0;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 8px;
+    margin: 0px 8px;
+}
+
+.navButton2 {
+    background-color: #5c7e10;
+    border: none;
+    color: #c5c3c0;
+    padding: 8px;
+    margin: 0px 8px;
+    cursor: pointer;
+}
+
+.navButton:hover{
+    color: white;
+}
+
+.navButton2:hover{
+    color: white;
 }

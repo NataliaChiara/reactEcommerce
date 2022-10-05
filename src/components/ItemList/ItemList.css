@@ -1,0 +1,7 @@
+.ItemList {
+    height: fit-content;
+    max-width: 100vw;
+    background: linear-gradient(to bottom, #2b465e, #1a2938);
+    display: flex;
+    flex-wrap: wrap;
+}

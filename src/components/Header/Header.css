@@ -1,0 +1,10 @@
+.frameHeader {
+    width: 100vw;
+    height: 60vh;
+}
+
+.video{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}

@@ -1,0 +1,8 @@
+.cart {
+    width: 30px;
+}
+
+.cartContainer{
+    display: flex;
+    align-items: center;
+}
