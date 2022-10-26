@@ -20,6 +20,8 @@
 .tittle {
     font-size: 25px;
     margin-left: 5px;
+    text-decoration: none;
+    color: #c5c3c0;;
 }
 
 .links {
@@ -28,8 +30,18 @@
     justify-content: space-around;
 }
 
-.navButton {
+.Option {
     background: none;
+    border: none;
+    color: #c5c3c0;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 8px;
+    margin: 0px 8px;
+}
+
+.ActiveOption {
+    background-color: #ff9900;
     border: none;
     color: #c5c3c0;
     text-decoration: none;

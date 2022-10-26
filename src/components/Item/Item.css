@@ -1,16 +1,10 @@
-
-.container {
-    display: flex;
-    justify-content: space-around;
-}
-
 .product {
     height: fit-content;
     display: flex;
     flex-direction: column;
     box-shadow: 0px 10px 10px -6px black;
     margin: 50px;
-    cursor: pointer;
+    background: #2078a0;
 }
 
 .frame {
@@ -25,27 +19,52 @@
 }
 
 .description {
-    background: linear-gradient(to bottom, #19587b, #2078a0);
+    width: 250px;
     color: white;
     padding: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    justify-content: space-around;
 }
 
 .description h1 {
-    font-size: 16px;
-    margin: 10px 0px;
+    font-size: 20px;
 }
 
 .description h2 {
-    font-size: 20px;
-    background-color: #4c6b22;
-    width: fit-content;
-    padding: 10px;
-    color: #a3cc0b;
+    font-size: 16px;
 }
 
 .link {
-    background: none;
-    color: white;
     border: none;
-    margin: 0px 10px 0px 0px;
+    cursor: pointer;
+    font-size: 18px;
+    background-color: #57772a;
+    width: fit-content;
+    padding: 5px;
+    color: #b7e415;
+}
+
+/* estilos exclusivos ItemDetail */
+
+.counter {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    background-color: white;
+    padding: 7px;
+}
+
+.counter p {
+    color: black;
+    font-size: 15px;
+}
+
+.counter button {
+    background: none;
+    height: 25px;
+    border: none;
+    height: 16px;
+    cursor: pointer;
 }

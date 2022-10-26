@@ -1,0 +1,18 @@
+.loading {
+    background: linear-gradient(to bottom, #2b465e, #1a2938);
+    height: 100vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding-top: 80px;
+}
+
+.ItemListContainer {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    background: linear-gradient(to bottom, #2b465e, #1a2938);
+}
+
