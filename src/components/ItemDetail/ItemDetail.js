@@ -1,8 +1,9 @@
 import '../Item/Item.css'
 // import Counter from './Counter/Counter'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-
+import CartWidget from '../NavBar/CartWidget/CartWidget'
+import { CartContext } from '../../context/CartContext'
 
 const Count = ({ onConfirm, stock, initial = 1 }) => {
     const [count, setCount] = useState(initial)
@@ -36,10 +37,18 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
 
     const [quantityToAdd, setQuantityToAdd] = useState(0)
 
+    const { addItem } = useContext(CartContext)
+
 
     const handleOnAdd = (quantity) => {
-
         setQuantityToAdd(quantity)
+
+        const productToAdd = {
+            id, name, price, quantity
+        }
+
+        addItem(productToAdd)
+
     }
 
 
