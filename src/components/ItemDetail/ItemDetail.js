@@ -66,11 +66,7 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
                     <h2>{description}</h2>
                     <h3 className='link'>{price}</h3>
                     {
-                        quantityToAdd === 0 ? (
-                            <Count onConfirm={handleOnAdd} stock={stock} />
-                        ) : (
-                            <Link to='/cart'>Finalizar compra</Link>
-                        )
+                        quantityToAdd === 0 ? (<Count onConfirm={handleOnAdd} stock={stock} />) : (<Link to='/cart'>Finalizar compra</Link>)
                     }
                 </div>
 

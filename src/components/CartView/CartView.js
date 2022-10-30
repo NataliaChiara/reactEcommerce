@@ -1,16 +1,14 @@
 import '../Item/Item.css'
 import { CartContext } from '../../context/CartContext'
 import { useContext } from 'react'
-
+import Checkout from '../Checkout/Checkout'
+import { Link } from "react-router-dom"
 
 
 
 const CartView = () => {
 
     const { cart, removeItem, totalQuantity, totalPrice } = useContext(CartContext);
-
-
-
 
 
     return (
@@ -37,7 +35,7 @@ const CartView = () => {
             </div>
             <h1>cantidad: {totalQuantity}</h1>
             <h1>precio: {totalPrice}</h1>
-
+            <Link to={`/checkout`} className="link">Checkout</Link>
         </div>
     )
 }

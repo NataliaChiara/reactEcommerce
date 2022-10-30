@@ -32,7 +32,7 @@ export const CartContextProvider = ({ children }) => {
     setTotalQuantity(totalQuantity)
     const totalPrice = getTotalPrice()
     settotalPrice(totalPrice)
-  }, [cart])
+  })
 
   const getTotalQuantity = () => {
     let totalQuantity = 0
@@ -49,7 +49,7 @@ export const CartContextProvider = ({ children }) => {
     let totalPrice = 0
 
     cart.forEach(prod => {
-      totalPrice += prod.price
+      totalPrice += (prod.price*totalQuantity)
     })
 
     return totalPrice
