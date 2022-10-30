@@ -5,14 +5,16 @@ export const CartContext = createContext()
 export const CartContextProvider = ({ children }) => {
 
   const [cart, setCart] = useState([])
-  const [ totalQuantity, setTotalQuantity ] = useState(0)
-  console.log(cart)
+  const [totalQuantity, setTotalQuantity] = useState(0)
+  const [totalPrice, settotalPrice] = useState(0)
+  // console.log(cart)
 
   const addItem = (productToAdd) => {
+    
     if (!isInCart(productToAdd.id)) {
       setCart([...cart, productToAdd])
     } else {
-      console.log('ya esta agregado')
+      alert('ya esta agregado')
     }
   }
 
@@ -25,9 +27,11 @@ export const CartContextProvider = ({ children }) => {
     setCart(cartWithoutItem)
   }
 
-  useEffect(() =>{
+  useEffect(() => {
     const totalQuantity = getTotalQuantity()
     setTotalQuantity(totalQuantity)
+    const totalPrice = getTotalPrice()
+    settotalPrice(totalPrice)
   }, [cart])
 
   const getTotalQuantity = () => {
@@ -41,9 +45,22 @@ export const CartContextProvider = ({ children }) => {
 
   }
 
+  const getTotalPrice = () => {
+    let totalPrice = 0
+
+    cart.forEach(prod => {
+      totalPrice += prod.price
+    })
+
+    return totalPrice
+
+  }
+
   return (
-    <CartContext.Provider value={{ cart, totalQuantity, addItem, removeItem }}>
+
+    <CartContext.Provider value={{ cart, totalQuantity, totalPrice, isInCart, addItem, removeItem }}>
       {children}
     </CartContext.Provider>
   )
 }
+

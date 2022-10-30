@@ -44,7 +44,7 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
         setQuantityToAdd(quantity)
 
         const productToAdd = {
-            id, name, price, quantity
+            id, name, price, quantity, img, category
         }
 
         addItem(productToAdd)
@@ -63,6 +63,7 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
                 <div className="description">
                     <h1>{name}</h1>
                     <h2>category: {category}</h2>
+                    <h2>{description}</h2>
                     <h3 className='link'>{price}</h3>
                     {
                         quantityToAdd === 0 ? (
