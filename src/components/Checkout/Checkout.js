@@ -1,39 +1,71 @@
 import ContactForm from '../ContactForm/ContactForm'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { CartContext } from '../../context/CartContext'
-import { addDoc, collection } from 'firebase/firestore'
-import { db } from '../../service/firebase'
+import saveOrder from '../../service/firebase/firestore'
 
+export const Checkout = () => {
 
-const Checkout = () => {
-
-    const { cart, totalPrice } = useContext(CartContext)
-
-
-    const createOrder = () => {
-        const order = {
-            buyer: {
-                name: 'natalia chiara',
-                phone: '1150475451',
-                email: 'natalia.chiara@98gmail.com'
-            },
-            items: cart,
-            total: totalPrice
+    const {cart,totalCart,clearCart} = useContext(CartContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const createOrder = async (buyer) => {
+      const orderObj = {
+        buyer,
+        items: cart,
+        total: totalCart
         }
-        console.log(order)
-
-        const collectionRef = collection(db, 'orders')
-
-        addDoc(collectionRef, order)
+        setIsLoading(true)
+        const resp = await saveOrder(cart,orderObj,clearCart)
+        if(resp === true){
+          alert('La compra fue realizada con exito');
+          setIsLoading(false)
+        }else{
+            alert('La compra no fue realizada con exito');
+        }
     }
 
-    return (
-        <>
-            <h1>Checkout</h1>
-            <button onClick={createOrder}>Agregar documento</button>
-
-        </>
+    return(
+      <div>
+        {
+          isLoading 
+          ? <h1>...Cargando</h1> 
+          : <ContactForm createOrder={createOrder}/>
+        }
+      </div>
     )
 }
+
+
+
+// const Checkout = (nombre, phone) => {
+
+//     const { cart, totalPrice } = useContext(CartContext)
+
+
+//     const createOrder = () => {
+//         const order = {
+//             buyer: {
+//                 name: nombre,
+//                 phone: '123456',
+//                 email: 'emailfalso@gmail.com'
+//             },
+//             items: cart,
+//             total: totalPrice
+//         }
+//         console.log(order)
+
+//         const collectionRef = collection(db, 'orders')
+
+//         addDoc(collectionRef, order)
+//     }
+
+//     return (
+//         <>
+//             <h1>Checkout</h1>
+//             {/* <ContactForm /> */}
+//             <button onClick={/*createOrder*/ console.log(nombre)}>Agregar documento</button>
+
+//         </>
+//     )
+// }
 
 export default Checkout

@@ -16,3 +16,6 @@ const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app)
 
+// https://drive.google.com/file/d/1UcStUDi9RPcHrVFDNPpzXlZNZ5neEWp4/view?usp=share_link
+
+// http://drive.google.com/uc?export=view&id=1UcStUDi9RPcHrVFDNPpzXlZNZ5neEWp4

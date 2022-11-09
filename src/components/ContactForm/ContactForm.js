@@ -1,65 +1,90 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { CartContext } from '../../context/CartContext';
+import { createBuyOrder } from '../../service/firebase/firestore'
+
 
 function ContactForm() {
-  const [nombre, setNombre] = useState();
-  const [phone, setPhone] = useState();
-  const [email, setEmail] = useState();
-  const [checkEmail, setCheckEmail] = useState();
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    let caracteresNombre = [...nombre]
-    caracteresNombre.length < 3 ? alert('nombre muy corto') : console.log(nombre, email, checkEmail)
-    email === checkEmail ? console.log('datos correctos') : alert('emails no coinciden')
-    setNombre('')
-    setEmail('')
-    setCheckEmail('')
-  }
 
-  return (
-    <form onSubmit={e => { handleSubmit(e) }}>
-      <label>Nombre:</label>
-      <br />
-      <input
-        name='nombre'
-        type='name'
-        value={nombre}
-        onChange={e => setNombre(e.target.value)}
-      />
-      <br />
-      <label>Telefono:</label>
-      <br />
-      <input
-        name='phone'
-        type='phone'
-        value={phone}
-        onChange={e => setPhone(e.target.value)}
-      />
-      <br />
-      <label>Email:</label>
-      <br />
-      <input
-        name='email'
-        type='email'
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
-      <br />
-      <label>Confirmacion email:</label>
-      <br />
-      <input
-        name='checkEmail'
-        type='email'
-        value={checkEmail}
-        onChange={e => setCheckEmail(e.target.value)}
-      />
-      <br />
-      <input
-        type='submit'
-        value='Enviar'
-      />
-    </form>
-  )
+    const context = useContext(CartContext)
+    const { cart, totalQuantity, totalPrice, isInCart, addItem, removeItem } = context
+    const navigate = useNavigate()
+
+    const [dataForm, setDataForm] = useState({
+        name: "",
+        phone: "",
+        email: "",
+    });
+
+    function handleCheckout(event) {
+
+        event.preventDefault();
+        const orderData = {
+            buyer: dataForm,
+            items: cart,
+            total: totalPrice,
+        };
+        createBuyOrder(orderData).then((orderid) => {
+            alert('creaste la orden guachin')
+            navigate(`/checkout/${orderid}`);
+        });
+    }
+
+    function inputChangeHandler(evento) {
+        let inputName = evento.target.name;
+        let value = evento.target.value;
+
+        const newDataForm = { ...dataForm };
+        newDataForm[inputName] = value;
+        setDataForm(newDataForm);
+    }
+
+    return (
+        <div className="form-container">
+            <form className="form" onSubmit={handleCheckout}>
+                <div className="form-item">
+                    <label htmlFor="name"></label>
+                    <input
+                        value={dataForm.name}
+                        onChange={inputChangeHandler}
+                        name="name"
+                        type="text"
+                        placeholder="Nombre"
+                        required
+                    />
+                </div>
+                <div className="form-item">
+                    <label htmlFor="telefono"></label>
+                    <input
+                        value={dataForm.phone}
+                        onChange={inputChangeHandler}
+                        name="phone"
+                        type="text"
+                        placeholder="Telefono"
+                        required
+                    />
+                </div>
+                <div className="form-item">
+                    <label htmlFor="email"></label>
+                    <input
+                        value={dataForm.email}
+                        onChange={inputChangeHandler}
+                        name="email"
+                        type="email"
+                        placeholder="Correo"
+                        required
+                    />
+                </div>
+                <div className="totalPrice">
+                    <span>Total Price ${totalPrice}</span>
+                    <button type="submit" className="buyCartButton">
+                        Purchase
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
 }
 
 export default ContactForm;
